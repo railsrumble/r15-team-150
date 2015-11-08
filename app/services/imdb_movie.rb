@@ -23,8 +23,19 @@ class ImdbMovie
     end
   end
 
+  # TODO Refactor code
   def search_by_name(name)
-    results = Tmdb::Movie.find(name)
+    results = nil
+    i=1
+    until (i>2 or results.present?) do
+      if i==1
+        results = Tmdb::Movie.find(name)
+      elsif i==2
+        results = Tmdb::Movie.find(cleanname1(name))
+      end
+      i=i+1
+    end
+    results
   end
 
   def save_movie(params)
@@ -33,7 +44,12 @@ class ImdbMovie
   end
 
   def save_empty_result(name)
-    
+    @user.movies.find_or_create_by(name: name)
+  end
+
+  # TODO Refactor (Use name clean logic in one place)
+  def cleanname1(name)
+    name.split( )[0]
   end
 
 end

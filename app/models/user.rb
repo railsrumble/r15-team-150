@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :user_latest_uploads, dependent: :destroy
 
   def has_this_movie_name?(movie_name)
-    movies.where(name: movie_name).present?
+    movies.where("name = ? and imdb_name is not null", movie_name).present?
   end
 
   def create_chrome_app_session_id
