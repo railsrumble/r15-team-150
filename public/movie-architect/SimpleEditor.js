@@ -30,12 +30,19 @@ function openFile() {
              } else {
                results.forEach(
                  function(item, indx) {
-                   console.log(item);
-                   fileList.push(item.fullPath);
+                    if(item.isDirectory === false) {
+                      var ext = item.name.split('.').pop(); 
+                      console.log(ext);
+                      if(ext == "mp4" || ext == "avi" || ext == "mkv"){
+                        fileList.push(item.fullPath);
+                      }
+                    }
+                    else {
+                      fileList.push(item.fullPath);
+                    }
                   // listResults(fileList);
                  }
                );
-               console.log("heerer");
               document.getElementById('submit_button').style.display = "block";
               // execute(fileList);
              }
@@ -64,15 +71,35 @@ function listResults(entries) {
 function execute(){
  document.getElementById('loading').style.display = "block";
  document.getElementById('open').style.display = "none";
+ document.getElementById('info').style.display = "none";
  document.getElementById('submit_button').style.display = "none";
+
+//clean up files
+
  var xhr = new XMLHttpRequest();
  var url = 'http://localhost:3000/files?session='+session_id;
  xhr.open('post', url, true);
- // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
- xhr.send(JSON.stringify(fileList), chrome_session_id: session_id);
+ xhr.responseType = "json";
+ xhr.onload = function() {
+    var status = xhr.status;
+    if (status == 200) {
+      document.getElementById('after-chosen').style.display= "none";
+     document.getElementById('status').style.display = "inline-block";
+     document.getElementById('status').className = "success";
+     document.getElementById("status").innerHTML = "Successfully added files to your account.<br/> Please log in and check."
+      } else {
+      document.getElementById('after-chosen').style.display = "none";
+      document.getElementById('open').style.display = "inline-block";
+      document.getElementById('status').style.display = "inline-block";
+      document.getElementById('status').className = "failed";
+     document.getElementById("status").innerHTML = "Failed"
+      }
+    };
+ xhr.setRequestHeader('Content-type', 'application/json');
+ xhr.send(JSON.stringify(fileList));
  console.log(xhr.response);
  return xhr.response;
-};
+}
 
 function errorHandler(e) {
  var msg = '';
