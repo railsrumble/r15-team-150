@@ -5,5 +5,5 @@ development:
   database: movies-architect-dev
   pool: 5
   username: root
-  password: mysqlpassword
-  socket: /var/mysql/mysql.sock
+  password: 
+  socket: /tmp/mysql.sock

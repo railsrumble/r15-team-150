@@ -1,9 +1,100 @@
-<h1> Your Movies List </h1>
-<% @movies.each do |movie| %>
-  <h3><%= movie.name %></h3>
-  <%= movie.tagline %>
-  <%= movie.rating %>
-  <%= movie.categories %>
-  <%= movie.languages %>
-  <%= movie.runtime %><br/><br/>
-<% end %>
+
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper"><a class="page-title"><h2> Your Movies List </h2></a></div>
+    </div>
+  </nav>
+<div class="container">
+	<div class="row">
+	  <div class="col s12">
+	  	<div class="movie-listing">
+	  		<h3>PIKU</h3>
+	  		<div class="card-panel red lighten-5">
+          <span class="red-text text-darken-2">I am a very simple card. I am good at containing small bits of information.
+          I am convenient because I require little markup to use effectively. I am similar to what is called a panel in other frameworks.
+          </span>
+        </div>
+	  	</div>
+			<div class="movie-listing">
+				<h3>PIKU</h3>
+				<table class="bordered highlight">
+		      <thead>
+		        <tr>
+		            <th width="40%" data-field="id">Name</th>
+		            <th width="20%" data-field="name">Language</th>
+		            <th width="20%" data-field="name">Genres</th>
+		            <th width="15%" data-field="price">Rating</th>
+		            <th width="5%"></th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		        <tr>
+		          <td>Alvin</td>
+		          <td>English</td>
+		          <td>Eclair</td>
+		          <td>$0.87</td>
+		          <td><i class="small material-icons">delete</i></td>
+		        </tr>
+		        <tr>
+		          <td>Alan</td>
+		          <td>Hindi</td>
+		          <td>Jellybean</td>
+		          <td>$3.76</td>
+		          <td><i class="small material-icons">delete</i></td>
+		        </tr>
+		        <tr>
+		          <td>Jonathan</td>
+		          <td>Telugu</td>
+		          <td>Lollipop</td>
+		          <td>$7.00</td>
+		          <td><i class="small material-icons">delete</i></td>
+		        </tr>
+		      </tbody>
+		    </table>
+		  </div>	  
+		  <div class="movie-listing">
+				<h3>Madagascar</h3>
+				<table class="bordered highlight">
+		      <thead>
+		        <tr>
+		            <th data-field="id">Name</th>
+		            <th data-field="name">Language</th>
+		            <th data-field="name">Genres</th>
+		            <th data-field="price">Rating</th>
+		        </tr>
+		      </thead>
+
+		      <tbody>
+		        <tr>
+		          <td>Alvin</td>
+		          <td>English</td>
+		          <td>Eclair</td>
+		          <td>$0.87</td>
+		        </tr>
+		        <tr>
+		          <td>Alan</td>
+		          <td>Hindi</td>
+		          <td>Jellybean</td>
+		          <td>$3.76</td>
+		        </tr>
+		        <tr>
+		          <td>Jonathan</td>
+		          <td>Telugu</td>
+		          <td>Lollipop</td>
+		          <td>$7.00</td>
+		        </tr>
+		      </tbody>
+		    </table>
+				<% @movies.each do |movie| %>
+				  <!-- <h3><%= movie.name %></h3> -->
+				  <%= movie.imdb_name %>
+				  <%= movie.tagline %>
+				  <%= movie.rating %>
+				  <%= movie.categories %>
+				  <%= movie.languages %>
+				  <%= movie.runtime %><br/><br/>
+				<% end %>
+			</div>
+		</div>
+	</div>	
+</div>	
