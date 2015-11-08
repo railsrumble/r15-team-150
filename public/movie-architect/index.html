@@ -172,19 +172,19 @@
     <button id="open" class="button blue" type="submit" name="action">Choose Your Movie Folder
        <i class="material-icons right"></i>
     </button><br/>
-    <div class ="after-chosen">
-      <div class="loading"></div>
+    <div class ="after-chosen" id = "after-chosen" style="display:none">
+      <div class="loading" id="loading" style="display:none"></div>
       <p><small>Your chosen folder</small></p>
-      <div class ="folder-path">
-        D:/Desktop/Movies/D:/Desktop/Movies/
+      <div class ="folder-path" id="folder-path">
+        
       </div>
-      <p><small>Click the submit button</small></p>
-      <button id="open" class="button green" type="submit" name="action">
-        Submit 
-      </button>
+      <div class="submit_button" id = "submit_button" style="display:none;">
+        <p><small>Click the submit button</small></p>
+        <button id="submit" class="button green" type="submit" name="action">
+          Submit 
+        </button>
+      </div>
     </div>
-  </div>  
-  <div id="filelist">
   </div>
 </body>
 </html> 
