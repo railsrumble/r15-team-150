@@ -13,8 +13,5 @@
       {
         "fileSystem": ["write", "retainEntries","directory" ]
       }
-    ],
-    "externally_connectable": {
-    "matches": ["*://localhost/*"]
-}
+    ]
 }
