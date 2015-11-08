@@ -1,10 +1,9 @@
 
-  <nav class="top-nav">
-    <div class="container">
-      <div class="nav-wrapper"><a class="page-title"><h2> Your Movies List </h2></a></div>
-    </div>
-  </nav>
-<div class="container">
+
+
+      <h2> Your Movies List </h2>
+
+
 	<div class="row">
 	  <div class="col s12">
       <% @movies.each do |movie_name, movies_list| %>
@@ -24,7 +23,7 @@
                     <th width="20%" data-field="name">Language</th>
                     <th width="20%" data-field="name">Genres</th>
                     <th width="15%" data-field="price">Rating</th>
-                    <th width="5%"></th>
+                    <th width="5%">&nbsp;</th>
                 </tr>
               </thead>
               <tbody>
@@ -49,7 +48,7 @@
       <% end %>
     </div>
 	</div>
-</div>
+
 
 <script>
 // $(document).ready(function() {

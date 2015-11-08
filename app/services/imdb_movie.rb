@@ -17,8 +17,8 @@ class ImdbMovie
       movies_list[0..4].each do |movie|
         if !@user.has_this_movie_name?(name, movie.original_title)
           movie_details = Tmdb::Movie.detail(movie.id)
-          genres = movie_details['genres'].map{|m| m['name']}.join(',') if movie_details['genres'].present?
-          languages = movie_details['spoken_languages'].map{|m| m['name']}.join(',') if movie_details['spoken_languages'].present?
+          genres = movie_details['genres'].map{|m| m['name']}.join(', ') if movie_details['genres'].present?
+          languages = movie_details['spoken_languages'].map{|m| m['name']}.join(', ') if movie_details['spoken_languages'].present?
           params = {categories: genres, rating: movie.vote_average, imdb_name: movie.original_title, tagline: movie_details['tagline'], runtime: movie_details['runtime'], languages: languages, name: name, imdb_movie_id: movie.id}
           save_movie(params)
         end

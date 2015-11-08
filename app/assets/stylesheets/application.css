@@ -37,6 +37,8 @@ h2 {
   line-height: 64px !important;
   padding: 0;
   margin: 0 !important;
+	color: #9e9e9e;
+	border-bottom: 1px solid #9e9e9e;
 }
 h3 {
   font-size: 24px !important;
@@ -51,6 +53,14 @@ h4 {
 .movie-listing table tr .material-icons {
 	display: none;
 	font-size: 1.5rem;
+}
+.movie-listing h3 {
+	background: #e0f2f1;
+	padding: .5em;
+	margin: 1em 0 0 !important;
+	color: #333;
+	border-left: 3px solid #26a69a;
+	font-size: 20px !important;
 }
 .movie-listing table tr:hover .material-icons {
 	display: block;
