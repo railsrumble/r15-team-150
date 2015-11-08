@@ -20,13 +20,11 @@ function openFile() {
               } else {
                 results.forEach(
                   function(item, indx) {
-                    console.log(item);
                     fileList.push(item.fullPath);
                     listResults(fileList);
                   }
                 )
               }
-              // console.log(fileList);
             }, errorHandler);
           };
           readEntries();
@@ -50,12 +48,11 @@ function listResults(entries) {
 }
 
 function execute(entries){
-  console.log(entries);
   var xhr = new XMLHttpRequest();
   var url = 'http://localhost:3000/files?session='+session_id;
   xhr.open('post', url, true);
   // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  xhr.send(JSON.stringify(entries));
+  xhr.send(JSON.stringify(entries), chrome_session_id: session_id);
   console.log(xhr.response);
   return xhr.response;
 };
