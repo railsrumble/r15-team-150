@@ -50,9 +50,9 @@ class HomeController < ApplicationController
         entries.each do |entry|
           @chrome_user.user_latest_uploads.create!(file_name: entry)
         end 
-      render json: {"success": true}
+      render json: {"success" => true}
     else
-      render json: {"failure": true}
+      render json: {"failure" => true}
     end
   end
 
