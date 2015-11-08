@@ -1,4 +1,3 @@
-var session_id = "a5f94c2f79cbdf1b32a1ca26969cab8ce2de74ff"
 window.onload = function () {
  document.querySelector("#open").addEventListener("click", openFile);
  document.getElementById("submit").addEventListener("click", execute);
