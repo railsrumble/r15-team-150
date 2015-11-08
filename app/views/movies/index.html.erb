@@ -1,0 +1,9 @@
+<h1> Your Movies List </h1>
+<% @movies.each do |movie| %>
+  <h3><%= movie.name %></h3>
+  <%= movie.tagline %>
+  <%= movie.rating %>
+  <%= movie.categories %>
+  <%= movie.languages %>
+  <%= movie.runtime %><br/><br/>
+<% end %>
