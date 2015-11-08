@@ -2,6 +2,7 @@ require 'crxmake'
 
 class HomeController < ApplicationController
   skip_before_action :verify_authenticity_token, :only => [:get_files]
+  skip_before_action :authenticate_user!, :only => [:get_files]
 
   def index
     if current_user.chrome_app_session_id.blank? 
@@ -9,7 +10,7 @@ class HomeController < ApplicationController
     end
   end
 
-  def get_files
+  def download
     if current_user.chrome_app_session_id.blank?
       session_id = current_user.create_chrome_app_session_id
       # copy template chrome app directory named session_id
@@ -19,7 +20,7 @@ class HomeController < ApplicationController
       FileUtils.mkdir_p(dir+"/"+current_user.chrome_app_session_id)
       FileUtils.cp_r("#{Rails.root}/public/movie-architect/.",dir+"/"+current_user.chrome_app_session_id)
       newfile = File.open("#{Rails.root}/tmp/#{current_user.chrome_app_session_id}/test.js","w")
-      newfile.puts "var session_id = " + current_user.chrome_app_session_id + ";"
+      newfile.puts "var session_id = \"" + current_user.chrome_app_session_id + "\";"
       oldfile = File.open("#{Rails.root}/tmp/#{current_user.chrome_app_session_id}/SimpleEditor.js", "r+")
       oldfile.each_line { |line| newfile.puts line}
       oldfile.close()
@@ -32,10 +33,17 @@ class HomeController < ApplicationController
         # :pkey   => "#{Rails.root}/tmp/#{current_user.chrome_app_session_id}.pem",
         :crx_output => "#{Rails.root}/vendor/MovieArchitect.crx"
       )
-      # FileUtils.rm_rf("#{Rails.root}/tmp/#{current_user.chrome_app_session_id}")
-      # File.delete("#{Rails.root}/tmp/#{current_user.chrome_app_session_id}.pem")
+      FileUtils.rm_rf("#{Rails.root}/tmp/#{current_user.chrome_app_session_id}")
+      File.delete("#{Rails.root}/tmp/#{current_user.chrome_app_session_id}.pem")
 
-      send_file("#{Rails.root}/vendor/MovieArchitect.crx")
+      send_file("#{Rails.root}/vendor/MovieArchitect.crx", 
+         :type => "application/x-chrome-extension")
     end
+  end
+
+  # API to expose to Chrome App for retrieving the list of movie paths
+  def get_files
+    current_user = User.find_by_chrome_app_session_id(params[:session])
+
   end
 end

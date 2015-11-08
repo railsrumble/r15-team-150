@@ -3,4 +3,6 @@ Rails.application.routes.draw do
   root 'home#index'
 
   post '/files' => "home#get_files"
+  post '/download' => "home#download"
+
 end

@@ -9,16 +9,17 @@ var directoryEntry;
          type: 'openDirectory'
        },
        function (de) {
+        fileList = [];
          if (de) {
            directoryEntry = de;
-           fileList = [];
+           
            var dirReader = de.createReader();
            var readEntries = function() {
              dirReader.readEntries (function(results) {
-              console.log(results);
+              // console.log(results);
                results.forEach(
                   function(item, indx, arr) {
-                    // console.log(item.name);
+                    console.log(item.name);
                     fileList.push(item.name);
                   }
                 )
@@ -48,8 +49,7 @@ var directoryEntry;
 function request() {
   console.log("Calling rails");
   var xmlhttp = new XMLHttpRequest();
-  var url = "http://localhost:3000/files"+session_id;
-  var chrome_session_id = "abc";
+  var url = "http://localhost:3000/files?session="+session_id;
   // var token = $("meta[name='csrf-token']").attr("content");
   // xmlhttp.setRequestHeader("X-CSRF-Token", token);
 
