@@ -1,0 +1,20 @@
+{
+    "app": {
+        "background": {
+            "scripts": [ "background.js" ]
+        }
+    },
+    "manifest_version": 2,
+    "minimum_chrome_version": "23",
+    "name": "movie architect",
+    "version": "1.0.0",
+    "permissions": [
+      "<all_urls>",
+      {
+        "fileSystem": ["write", "retainEntries","directory" ]
+      }
+    ],
+    "externally_connectable": {
+    "matches": ["*://localhost/*"]
+}
+}
