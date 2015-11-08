@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>SimpleEditor</title>
+  <script src="SimpleEditor.js"></script>
+  <style type ="text/css">
+    @import url(https://fonts.googleapis.com/css?family=Roboto:400,500italic,300);
+    * {
+      padding:0;
+      margin:0;
+    }
+    body {
+      background: #EE6E73;
+      color: #fff;
+      font-family: 'Roboto', sans-serif;
+      padding: 2em 0;
+      
+    }
+    .welcome-message {
+      text-align:center;  
+    }
+    .welcome-message h1 {
+      padding: 20px 0 50px;
+      font-weight: 300;
+      font-size: 30px;
+      text-transform: uppercase;
+    }
+    .welcome-message p {
+      font-weight: 300;
+      font-size:18px;
+      padding: 5px 0;
+    }
+    .welcome-message p small {
+      color: #333;
+    }  
+    .button {
+      display: inline-block;
+      margin: 0.3em;
+      padding: 10px;
+      overflow: hidden;
+      position: relative;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-radius: 3px;
+      -webkit-transition: 0.3s;
+      -moz-transition: 0.3s;
+      -ms-transition: 0.3s;
+      -o-transition: 0.3s;
+      transition: 0.3s;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      border: none; 
+      font-size: 13px;
+      text-align: center;
+      min-width:300px;
+      max-width:300px;
+      white-space:nowrap;
+    }
+    
+    .button:hover {
+      box-shadow: 1px 6px 15px rgba(0,0,0,0.5);
+    }
+    
+    .grey {
+      color: white;
+      cursor: not-allowed;
+      box-shadow: none;  
+      overflow-x:scroll;
+    }
+    .green {
+      background-color: #4CAF50;
+      color: white;
+    }
+    .red {
+      background-color: #F44336;
+      color: white;
+    }
+    .blue {
+      background-color: #03A9F4;
+      color: white;
+    }
+    .ripple {
+      position: absolute;
+      background: rgba(0,0,0,.25);
+      border-radius: 100%;
+      transform: scale(0.2);
+      opacity:0;
+      pointer-events: none;
+      -webkit-animation: ripple .75s ease-out;
+      -moz-animation: ripple .75s ease-out;
+      animation: ripple .75s ease-out;
+    }
+    
+    @-webkit-keyframes ripple {
+      from {
+        opacity:1;
+      }
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+    
+    @-moz-keyframes ripple {
+      from {
+        opacity:1;
+      }
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+    
+    @keyframes ripple {
+      from {
+        opacity:1;
+      }
+      to {
+        transform: scale(2);
+        opacity: 0;
+      }
+    }
+    .folder-path {
+      background: #f7f7f7;
+      color: grey;
+      display: inline-block;
+      margin: 0.3em;
+      padding: 10px;
+      position: relative;
+      text-decoration: none;
+      text-transform: uppercase;
+      border-radius: 1px;
+      border: none; 
+      font-size: 13px;
+      text-align: center;
+      min-width:280px;
+      max-width:280px;
+      white-space:nowrap;   
+      overflow-x:scroll;  
+    }
+    .loading {
+      position:absolute;
+      top:50px;
+      left:45%;
+      background-color: rgba(0,0,0,0);
+      border:7px solid rgba(125,125,125,0.8);
+      opacity:.9;
+      border-top:7px solid rgba(0,0,0,0);
+      border-left:7px solid rgba(0,0,0,0);
+      border-radius:50px;
+      box-shadow: 0 0 35px #ccc;
+      width:20px;
+      height:20px;
+      -webkit-animation:spin 1.2s infinite linear;
+      z-index:100;
+    }
+    
+    @-webkit-keyframes spin {
+      0% { -webkit-transform:rotate(0deg); }
+      100% { -webkit-transform:rotate(360deg); }
+    }
+    .after-chosen {
+      position:relative; 
+      width: 100%;    
+    }
+  </style>
+</head>
+<body>
+  <div class ="welcome-message">
+    <p>Welcome to</p>
+    <h1><i class="fa fa-smile-o"></i> Movie Architect <i class="fa fa-smile-o"></i> </h1>
+    <button id="open" class="button blue" type="submit" name="action">Choose Your Movie Folder
+       <i class="material-icons right"></i>
+    </button><br/>
+    <div class ="after-chosen">
+      <div class="loading"></div>
+      <p><small>Your chosen folder</small></p>
+      <div class ="folder-path">
+        D:/Desktop/Movies/D:/Desktop/Movies/
+      </div>
+      <p><small>Click the submit button</small></p>
+      <button id="open" class="button green" type="submit" name="action">
+        Submit 
+      </button>
+    </div>
+  </div>  
+  <div id="filelist">
+  </div>
+</body>
+</html> 

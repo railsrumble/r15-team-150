@@ -5,9 +5,16 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :movies, dependent: :destroy
+  has_many :user_latest_uploads, dependent: :destroy
 
   def has_this_movie_name?(movie_name)
     movies.where(name: movie_name).present?
+  end
+
+  def create_chrome_app_session_id
+    sha = Digest::SHA1.hexdigest([Time.now, rand].join)
+    update_attributes(chrome_app_session_id: sha)
+    return chrome_app_session_id
   end
 
 end
