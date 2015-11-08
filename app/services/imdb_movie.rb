@@ -4,7 +4,7 @@ class ImdbMovie
     @tmdb_api = 'a6b991e775684f55f3bdb5ae626771f1'
     Tmdb::Api.key(@tmdb_api)
     Tmdb::Api.language("de")
-    @user = User.find(1)#current_user
+    @user = current_user
   end
 
   def movie_info(names)
@@ -30,11 +30,15 @@ class ImdbMovie
   def search_by_name(name)
     results = nil
     i=1
-    until (i>2 or results.present?) do
+    until (i>3 or results.present?) do
       if i==1
         results = Tmdb::Movie.find(name)
       elsif i==2
-        results = Tmdb::Movie.find(cleanname1(name))
+        c_name = (name.split( ) - ['[',']','/','-']).delete_if{|m| m.include?('.com')}[0..2].join(' ')
+        results = Tmdb::Movie.find(c_name) if c_name
+      elsif i==3
+        c_name = (name.split( ) - ['[',']','/','-']).delete_if{|m| m.include?('.com')}[0]
+        results = Tmdb::Movie.find(c_name) if c_name
       end
       i=i+1
     end

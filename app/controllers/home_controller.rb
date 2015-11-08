@@ -46,7 +46,7 @@ class HomeController < ApplicationController
         @chrome_user.user_latest_uploads.present? ? @chrome_user.user_latest_uploads.delete_all : ""
         entries.each do |entry|
           @chrome_user.user_latest_uploads.create!(file_name: entry)
-        end 
+        end
       render json: {"success" => true}
     else
       render json: {"failure" => true}
