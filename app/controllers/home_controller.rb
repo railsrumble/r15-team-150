@@ -40,17 +40,12 @@ class HomeController < ApplicationController
 
   # API to expose to Chrome App for retrieving the list of movie paths
   def get_files
-    if params[:entries].present?
-       # @chrome_user = User.find_by_chrome_app_session_id(params[:session])
-        entries = params[:entries].split(",")
-        @chrome_user.user_latest_uploads.present? ? @chrome_user.user_latest_uploads.delete_all : ""
-        entries.each do |entry|
-          @chrome_user.user_latest_uploads.create!(file_name: entry)
-        end
-      render json: {"success" => true}
-    else
-      render json: {"failure" => true}
-    end
+    entries = params[:home][:_json]
+    @chrome_user.user_latest_uploads.present? ? @chrome_user.user_latest_uploads.delete_all : ""
+    entries.each do |entry|
+      puts entry
+      @chrome_user.user_latest_uploads.create!(file_name: entry)
+    end 
+    render json: {"success" => true}
   end
-
 end

@@ -15,10 +15,10 @@
       color: #fff;
       font-family: 'Roboto', sans-serif;
       padding: 2em 0;
-
+      
     }
     .welcome-message {
-      text-align:center;
+      text-align:center;  
     }
     .welcome-message h1 {
       padding: 20px 0 50px;
@@ -33,7 +33,7 @@
     }
     .welcome-message p small {
       color: #333;
-    }
+    }  
     .button {
       display: inline-block;
       margin: 0.3em;
@@ -49,22 +49,22 @@
       -o-transition: 0.3s;
       transition: 0.3s;
       box-shadow: 0 2px 10px rgba(0,0,0,0.5);
-      border: none;
+      border: none; 
       font-size: 13px;
       text-align: center;
       min-width:300px;
       max-width:300px;
       white-space:nowrap;
     }
-
+    
     .button:hover {
       box-shadow: 1px 6px 15px rgba(0,0,0,0.5);
     }
-
+    
     .grey {
       color: white;
       cursor: not-allowed;
-      box-shadow: none;
+      box-shadow: none;  
       overflow-x:scroll;
     }
     .green {
@@ -90,7 +90,7 @@
       -moz-animation: ripple .75s ease-out;
       animation: ripple .75s ease-out;
     }
-
+    
     @-webkit-keyframes ripple {
       from {
         opacity:1;
@@ -100,7 +100,7 @@
         opacity: 0;
       }
     }
-
+    
     @-moz-keyframes ripple {
       from {
         opacity:1;
@@ -110,7 +110,7 @@
         opacity: 0;
       }
     }
-
+    
     @keyframes ripple {
       from {
         opacity:1;
@@ -130,13 +130,13 @@
       text-decoration: none;
       text-transform: uppercase;
       border-radius: 1px;
-      border: none;
+      border: none; 
       font-size: 13px;
       text-align: center;
       min-width:280px;
       max-width:280px;
-      white-space:nowrap;
-      overflow-x:scroll;
+      white-space:nowrap;   
+      overflow-x:scroll;  
     }
     .loading {
       position:absolute;
@@ -154,14 +154,44 @@
       -webkit-animation:spin 1.2s infinite linear;
       z-index:100;
     }
-
+    
     @-webkit-keyframes spin {
       0% { -webkit-transform:rotate(0deg); }
       100% { -webkit-transform:rotate(360deg); }
     }
     .after-chosen {
-      position:relative;
-      width: 100%;
+      position:relative; 
+      width: 100%;    
+    }
+    #info {
+      font-size: 12px;
+      line-height: 20px;
+      text-align: left;
+      max-width: 280px;
+      min-width: 280px;
+      margin:10px auto;
+      
+    }
+    #status {
+      background: #fff;
+      padding: 15px;
+      border: 1px solid;
+      padding: 15px;
+      border: 1px solid;
+      font-size: 14px;
+      line-height: 20px;
+      text-align: left;
+      max-width: 280px;
+      min-width: 280px;
+    }
+    #status span { color:grey; }
+    .success {
+      border-color: green;
+      color: green;
+    } 
+    .failed {
+      border-color: red;
+      color: red;
     }
   </style>
 </head>
@@ -169,22 +199,27 @@
   <div class ="welcome-message">
     <p>Welcome to</p>
     <h1><i class="fa fa-smile-o"></i> Movie Architect <i class="fa fa-smile-o"></i> </h1>
+    
     <button id="open" class="button blue" type="submit" name="action">Choose Your Movie Folder
        <i class="material-icons right"></i>
-    </button><br/>
-    <div class ="after-chosen">
-      <div class="loading"></div>
+    </button>
+    <br/>
+    <div id="info">Note: Please ensure that your selecting folder does't have sub-folder's.</div>
+    
+    <div id="status" class="" style="display:none;"></div>
+    <div class ="after-chosen" id = "after-chosen" style="display:none">
+      <div class="loading" id="loading" style="display:none"></div>
       <p><small>Your chosen folder</small></p>
-      <div class ="folder-path">
-        D:/Desktop/Movies/D:/Desktop/Movies/
+      <div class ="folder-path" id="folder-path">
+      
       </div>
-      <p><small>Click the submit button</small></p>
-      <button id="open" class="button green" type="submit" name="action">
-        Submit
-      </button>
+      <div class="submit_button" id = "submit_button" style="display:none;">
+        <p><small>Click the submit button</small></p>
+        <button id="submit" class="button green" type="submit" name="action">
+          Submit 
+        </button>
+      </div>
     </div>
-  </div>
-  <div id="filelist">
   </div>
 </body>
 </html>
