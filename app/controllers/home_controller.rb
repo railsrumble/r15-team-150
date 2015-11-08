@@ -13,6 +13,7 @@ class HomeController < ApplicationController
   def download
     if current_user.chrome_app_session_id.blank?
       session_id = current_user.create_chrome_app_session_id
+    end
       # copy template chrome app directory named session_id
       # add session id to SimpleEditor.js
       # create crx
@@ -34,16 +35,25 @@ class HomeController < ApplicationController
         :crx_output => "#{Rails.root}/vendor/MovieArchitect.crx"
       )
       FileUtils.rm_rf("#{Rails.root}/tmp/#{current_user.chrome_app_session_id}")
-      File.delete("#{Rails.root}/tmp/#{current_user.chrome_app_session_id}.pem")
+      File.delete("#{Rails.root}/#{current_user.chrome_app_session_id}.pem")
 
       send_file("#{Rails.root}/vendor/MovieArchitect.crx", 
          :type => "application/x-chrome-extension")
-    end
   end
 
   # API to expose to Chrome App for retrieving the list of movie paths
   def get_files
-    current_user = User.find_by_chrome_app_session_id(params[:session])
-
+    if params[:entries].present?
+       # @chrome_user = User.find_by_chrome_app_session_id(params[:session])
+        entries = params[:entries].split(",")
+        @chrome_user.user_latest_uploads.present? ? @chrome_user.user_latest_uploads.delete_all : ""
+        entries.each do |entry|
+          @chrome_user.user_latest_uploads.create!(file_name: entry)
+        end 
+      render json: {"success": true}
+    else
+      render json: {"failure": true}
+    end
   end
+
 end
