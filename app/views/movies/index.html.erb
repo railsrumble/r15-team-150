@@ -1,9 +1,68 @@
-<h1> Your Movies List </h1>
-<% @movies.each do |movie| %>
-  <h3><%= movie.name %></h3>
-  <%= movie.tagline %>
-  <%= movie.rating %>
-  <%= movie.categories %>
-  <%= movie.languages %>
-  <%= movie.runtime %><br/><br/>
-<% end %>
+
+  <nav class="top-nav">
+    <div class="container">
+      <div class="nav-wrapper"><a class="page-title"><h2> Your Movies List </h2></a></div>
+    </div>
+  </nav>
+<div class="container">
+	<div class="row">
+	  <div class="col s12">
+      <% @movies.each do |movie_name, movies_list| %>
+  	  	<div class="movie-listing">
+  	  		<h3><%= movie_name %></h3>
+          <% if movies_list.map(&:imdb_name).uniq == [nil] %>
+    	  		<div class="card-panel red lighten-5">
+              <span class="red-text text-darken-2">
+                Sorry, We could not able to find any movie results for this text.
+              </span>
+            </div>
+          <% else %>
+            <table class="bordered highlight">
+              <thead>
+                <tr>
+                    <th width="40%" data-field="id">Name</th>
+                    <th width="20%" data-field="name">Language</th>
+                    <th width="20%" data-field="name">Genres</th>
+                    <th width="15%" data-field="price">Rating</th>
+                    <th width="5%"></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% movies_list.each do |movie| %>
+                  <tr class='<%= "movie-info-#{movie.id}" %>'>
+                    <td><%= movie.imdb_name %></td>
+                    <td><%= movie.languages %></td>
+                    <td><%= movie.categories %></td>
+                    <td><%= movie.rating %></td>
+                    <td>
+                      <a href="javascript:void(0);" class="small material-icons" id='<%= "delete-#{movie.id}" %>' onclick='DeleteSelectedMovie(<%= "#{movie.id}"%>);'>
+                        <i class="small material-icons">delete</i>
+                      </a>
+                    </td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+          <% end %>
+  	  	</div>
+      <% end %>
+    </div>
+	</div>
+</div>
+
+<script>
+// $(document).ready(function() {
+  function DeleteSelectedMovie(m_id) {
+    $.ajax({
+      url: '/movies/delete/',
+      type: 'DELETE',
+      data: {id: m_id},
+      success: function(result){
+        $('.movie-info-'+m_id).hide();
+      }
+    });
+
+  }
+// });
+</script>
