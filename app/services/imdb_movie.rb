@@ -1,10 +1,10 @@
 class ImdbMovie
 
-  def initialize
+  def initialize(user)
     @tmdb_api = 'a6b991e775684f55f3bdb5ae626771f1'
     Tmdb::Api.key(@tmdb_api)
     Tmdb::Api.language("de")
-    @user = current_user
+    @user = user
   end
 
   def movie_info(names)
@@ -52,11 +52,6 @@ class ImdbMovie
 
   def save_empty_result(name)
     @user.movies.find_or_create_by(name: name)
-  end
-
-  # TODO Refactor (Use name clean logic in one place)
-  def cleanname1(name)
-    name.split( )[0]
   end
 
 end

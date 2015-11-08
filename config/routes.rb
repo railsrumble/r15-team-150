@@ -8,6 +8,7 @@ Rails.application.routes.draw do
    get 'movies/index'
    delete 'movies/delete'
    get 'movies/show'
+   post 'movies/scrape'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

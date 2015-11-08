@@ -13,9 +13,12 @@
  *= require_tree .
  *= require_self
  */
-
+ ol {
+ 	list-style-position: inside;
+  padding: 0;
+	}
 header {
-	background: #4db6ac;	 
+	background: #4db6ac;
 	height: 60px;
 }
 
@@ -69,8 +72,8 @@ h4 {
 	padding: 0 10px;
 }
 .nav-link a:hover {
-	color: #fff;	
-}	
+	color: #fff;
+}
 section h1 {
 	color: #
 }

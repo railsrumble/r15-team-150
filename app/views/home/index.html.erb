@@ -1,52 +1,70 @@
-<div class="center-align">
-    <h2>Welcome to Movie Architect</h2>
-</div>
-<div class="left-align">
-    <p>Movie Architect is specifically designed for awesome people who love Binge-watching. This app will help you in categorizing the movies in your drive based on their ratings and category of cinema.</p>
-<h4>How To Use?</h4>
-<h4>Step: 1 Adding the APP to Chrome Browser APP's</h4>
-<ul class="collection">
-  <li class="collection-item">Download the Movie Architect Chrome APP</li>
-  <li class="collection-item">Drag & drop the download app file in to Chrome Extensions</li>
-</ul>
-</div>
 
-<div class="center-align">
-<p><%= link_to "Download", download_path , method: :post, :class=> 'btn' %></p>
-</div>
+<% if !current_user.user_latest_uploads.present? %>
+  <div class="center-align">
+      <h2>Welcome to Movie Architect</h2>
+  </div>
+  <div class="left-align">
+      <p>Movie Architect is specifically designed for awesome people who love Binge-watching. This app will help you in categorizing the movies in your drive based on their ratings and category of cinema.</p>
+  <h4>How To Use?</h4>
+  <h4>Step: 1 Adding the APP to Chrome Browser APP's <br/>
+    <small>(If you already Installed, please follow from Step: 2)</small></h4>
+  <ul class="collection">
+    <li class="collection-item">Download the Movie Architect Chrome APP</li>
+    <li class="collection-item">Drag & drop the download app file in to Chrome Extensions</li>
+  </ul>
+  </div>
 
-<div class="left-align">
-    <h4>Step: 2 </h4>
-    <ul class="collection">
-      <li class="collection-item">Run the Movie Architect APP</li>
-      <li class="collection-item">Select the movie folder which you want to categorize</li>
-      <li class="collection-item">Return back to Movie Architect web app to see the result</li>
-    </ul>
-</div>
+  <div class="center-align">
+  <p><%= link_to "Download", download_path , method: :post, :class=> 'btn' %></p>
+  </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", function(event){
+  <div class="left-align">
+      <h4>Step: 2 </h4>
+      <ul class="collection">
+        <li class="collection-item">Run the Movie Architect APP</li>
+        <li class="collection-item">Select the movie folder which you want to categorize</li>
+        <li class="collection-item">Return back to Movie Architect web app and <b>reload/ refresh the page</b> to see the result</li>
+      </ul>
+  </div>
 
- var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
- //console.log(is_chrome);
+  <script>
+  document.addEventListener("DOMContentLoaded", function(event){
 
-var hasExtension = false;
+   var is_chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+   //console.log(is_chrome);
+
+  var hasExtension = false;
 
 
-if(is_chrome){
-  chrome.runtime.sendMessage("fdmmgilgnpjigdojojpjoooidkmcomcm", { message: "version" },
-    function (reply) {
-      console.log(reply);
-        if (reply) {
-            if (reply.version) {
-                if (reply.version >= requiredVersion) {
-                    hasExtension = true;
-                }
-            }
-        }
-    });
-}
+  if(is_chrome){
+    chrome.runtime.sendMessage("fdmmgilgnpjigdojojpjoooidkmcomcm", { message: "version" },
+      function (reply) {
+        console.log(reply);
+          if (reply) {
+              if (reply.version) {
+                  if (reply.version >= requiredVersion) {
+                      hasExtension = true;
+                  }
+              }
+          }
+      });
+  }
 
 
 });
 </script>
+
+<% else %>
+  <h4>These are the movie names you have selected</h4><br/>
+  <div class="row">
+    <div class="col s12 m6 l12 center-align">
+      <%= link_to 'Get Info', movies_scrape_path, method: :post, class: "btn-large" %>
+    </div>
+  </div>
+  <ol class="collection">
+    <% current_user.user_latest_uploads.each do |name| %>
+      <li class="collection-item"><%= name.file_name %></li>
+    <% end %>
+  </ol>
+
+<% end %>
