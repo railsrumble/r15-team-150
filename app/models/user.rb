@@ -5,4 +5,9 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :movies, dependent: :destroy
+
+  def has_this_movie_name?(movie_name)
+    movies.where(name: movie_name).present?
+  end
+
 end
