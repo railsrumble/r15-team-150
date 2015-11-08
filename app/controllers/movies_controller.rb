@@ -1,7 +1,7 @@
 class MoviesController < ApplicationController
-
+  skip_before_action :verify_authenticity_token, only: [:delete]
   def index
-    @movies = current_user.movies
+    @movies = current_user.movies.group_by(&:name)
   end
 
   def show
@@ -11,7 +11,7 @@ class MoviesController < ApplicationController
   def delete
     movie = current_user.movies.find(params[:id])
     movie.destroy!
-    redirect_to movies_index_path, notice: "Removed Movie Successfully"
+    render json: {code: 200}
   end
 
 end

@@ -4,15 +4,18 @@ class ImdbMovie
     @tmdb_api = 'a6b991e775684f55f3bdb5ae626771f1'
     Tmdb::Api.key(@tmdb_api)
     Tmdb::Api.language("de")
-    @user = current_user
+    @user = User.find(1)#current_user
   end
 
   def movie_info(names)
     names.each do |name|
       movies_list = search_by_name(name)
-      save_empty_result(name) && break if !movies_list.present?
-      movies_list.each do |movie|
-        if !@user.has_this_movie?
+      if !movies_list.present?
+        save_empty_result(name)
+        break
+      end
+      movies_list[0..4].each do |movie|
+        if !@user.has_this_movie_name?(name, movie.original_title)
           movie_details = Tmdb::Movie.detail(movie.id)
           genres = movie_details['genres'].map{|m| m['name']}.join(',') if movie_details['genres'].present?
           languages = movie_details['spoken_languages'].map{|m| m['name']}.join(',') if movie_details['spoken_languages'].present?
