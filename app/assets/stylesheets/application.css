@@ -14,10 +14,21 @@
  *= require_self
  */
 
+header {
+	background: #4db6ac;	 
+	height: 60px;
+}
+
 .user-sign-in {
 	padding: 3em 0 ;
 }
-
+h1 {
+  font-size: 30px !important;
+  line-height: 60px !important;
+  padding: 0;
+  margin: 0 !important;
+  color: #fff;
+}
 h2 {
   font-size: 30px !important;
   line-height: 64px !important;
@@ -29,6 +40,11 @@ h3 {
   padding: 1em 0 0;
   margin: 0 !important;
 }
+h4 {
+  font-size: 18px !important;
+  padding: 1em 0 0;
+  margin: 0 !important;
+}
 .movie-listing table tr .material-icons {
 	display: none;
 	font-size: 1.5rem;
@@ -36,4 +52,25 @@ h3 {
 .movie-listing table tr:hover .material-icons {
 	display: block;
 	cursor: pointer;
+}
+.user-sign-in p {
+	color: grey;
+}
+.user-sign-in form {
+	margin: 2rem 0 0;
+}
+.nav-link {
+	line-height: 60px;
+	color: #fff;
+}
+.nav-link a {
+	color: #e8eaf6;
+	display: inline-block;
+	padding: 0 10px;
+}
+.nav-link a:hover {
+	color: #fff;	
+}	
+section h1 {
+	color: #
 }
