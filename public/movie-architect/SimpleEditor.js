@@ -46,7 +46,6 @@ function openFile() {
        } // end of if statement
      }
    );
- 
 }
 
 
@@ -63,8 +62,6 @@ function listResults(entries) {
 }
 
 function execute(){
- console.log("In execute");
- console.log(fileList);
  document.getElementById('loading').style.display = "block";
  document.getElementById('open').style.display = "none";
  document.getElementById('submit_button').style.display = "none";
@@ -72,10 +69,8 @@ function execute(){
  var url = 'http://localhost:3000/files?session='+session_id;
  xhr.open('post', url, true);
  // xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
- xhr.send(JSON.stringify(fileList));
+ xhr.send(JSON.stringify(fileList), chrome_session_id: session_id);
  console.log(xhr.response);
- //document.getElementById('loading').style.display = "none";
- 
  return xhr.response;
 };
 

@@ -9,7 +9,8 @@ class ImdbMovie
 
   def movie_info(names)
     names.each do |name|
-      movies_list = Tmdb::Movie.find(name)
+      movies_list = search_by_name(name)
+      save_empty_result(name) && break if !movies_list.present?
       movies_list.each do |movie|
         if !@user.has_this_movie?
           movie_details = Tmdb::Movie.detail(movie.id)
@@ -22,9 +23,17 @@ class ImdbMovie
     end
   end
 
+  def search_by_name(name)
+    results = Tmdb::Movie.find(name)
+  end
+
   def save_movie(params)
     movie_obj = @user.movies.where(imdb_name: params[:imdb_name]).find_or_create_by(imdb_movie_id: params[:imdb_movie_id])
     movie_obj.update_attributes!(params)
+  end
+
+  def save_empty_result(name)
+    
   end
 
 end

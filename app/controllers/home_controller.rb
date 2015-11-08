@@ -5,9 +5,6 @@ class HomeController < ApplicationController
   skip_before_action :authenticate_user!, :only => [:get_files]
 
   def index
-    if current_user.chrome_app_session_id.blank? 
-    
-    end
   end
 
   def download
@@ -28,7 +25,7 @@ class HomeController < ApplicationController
       newfile.close()
       File.delete("#{Rails.root}/tmp/#{current_user.chrome_app_session_id}/SimpleEditor.js")
       File.rename("#{Rails.root}/tmp/#{current_user.chrome_app_session_id}/test.js", "#{Rails.root}/tmp/#{current_user.chrome_app_session_id}/SimpleEditor.js")
-      
+
       CrxMake.make(
         :ex_dir => "#{Rails.root}/tmp/#{current_user.chrome_app_session_id}",
         # :pkey   => "#{Rails.root}/tmp/#{current_user.chrome_app_session_id}.pem",
@@ -37,7 +34,7 @@ class HomeController < ApplicationController
       FileUtils.rm_rf("#{Rails.root}/tmp/#{current_user.chrome_app_session_id}")
       File.delete("#{Rails.root}/#{current_user.chrome_app_session_id}.pem")
 
-      send_file("#{Rails.root}/vendor/MovieArchitect.crx", 
+      send_file("#{Rails.root}/vendor/MovieArchitect.crx",
          :type => "application/x-chrome-extension")
   end
 
@@ -50,9 +47,9 @@ class HomeController < ApplicationController
         entries.each do |entry|
           @chrome_user.user_latest_uploads.create!(file_name: entry)
         end 
-      render json: {"success": true}
+      render json: {"success" => true}
     else
-      render json: {"failure": true}
+      render json: {"failure" => true}
     end
   end
 

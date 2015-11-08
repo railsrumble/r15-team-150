@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
 
   protect_from_forgery with: :exception
   before_action :authenticate_user!
-  before_filter :chrome_user
+  before_filter :chrome_user, only: ['get_files']
 
   def chrome_user
     @chrome_user = User.find_by_chrome_app_session_id(params[:session])
