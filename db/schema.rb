@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151108040146) do
+ActiveRecord::Schema.define(version: 20151108071750) do
 
   create_table "movies", force: :cascade do |t|
     t.integer "user_id",       limit: 4
